@@ -110,21 +110,27 @@ Cluster 'https://463ED5F24BF0FF928739B9588A2258354.gr7.us-east-1.eks.amazonaws.c
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/7d2334c6-dbef-4a04-be9a-47dcf839f91e)
 
-Deploying the application to EKS
-configure application in argocd
+To deploying the application to EKS, we need to configure application in argocd UI:
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/c1234bbc-5532-47c5-bf0d-f69aa88dcf91)
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/46e24d66-3865-4258-8728-85082eab19c1)
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/66f2bd2a-2669-4a2f-a454-20650727d427)
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/74e69186-aabe-4678-a4f1-9d9b29a0084f)
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/f4fe30ab-9167-4cd7-9fec-b32cd1e76fcd)
 
+List the cluster context:
+```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl config get-contexts
 CURRENT   NAME                                                 CLUSTER                               AUTHINFO                                             NAMESPACE
 *         user@hub-cluster.us-east-1.eksctl.io       hub-cluster.us-east-1.eksctl.io       user@hub-cluster.us-east-1.eksctl.io       
           user@spoke-cluster-1.us-east-1.eksctl.io   spoke-cluster-1.us-east-1.eksctl.io   user@spoke-cluster-1.us-east-1.eksctl.io   
+```
+Switch the context to the spoke cluster:
+```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl config use-context user@spoke-cluster-1.us-east-1.eksctl.io
 Switched to context "user@spoke-cluster-1.us-east-1.eksctl.io".
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl get all
@@ -141,8 +147,9 @@ deployment.apps/guestbook-ui   1/1     1            1           4m55s
 NAME                                      DESIRED   CURRENT   READY   AGE
 replicaset.apps/guestbook-ui-6b7f6d9874   1         1         1       4m55s
 gitpod /workspace/argocd-hub-spoke (main) $ 
+```
 
-Change the following file and sync he application in argocd:
+Change the following file and sync the application in argocd:
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/cfeb302b-f408-4dba-be68-ba71278780a9)
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/9d7f89ce-ede9-4f42-bdec-c3849c419565)
