@@ -7,7 +7,8 @@ CURRENT   NAME                                                 CLUSTER          
  $ kubectl config current-context
 user@hub-cluster.us-east-1.eksctl.io
 $ kubectl config use-context user@hub-cluster.us-east-1.eksctl.io
-Switched to context "user@hub-cluster.us-east-1.eksctl.io".```
+Switched to context "user@hub-cluster.us-east-1.eksctl.io".
+```
 
 
 https://argo-cd.readthedocs.io/en/stable/getting_started/
