@@ -120,5 +120,26 @@ NAME                                      DESIRED   CURRENT   READY   AGE
 replicaset.apps/guestbook-ui-6b7f6d9874   1         1         1       4m55s
 gitpod /workspace/argocd-hub-spoke (main) $ 
 
+Change the following file and sync he application in argocd:
+![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/cfeb302b-f408-4dba-be68-ba71278780a9)
+
+![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/9d7f89ce-ede9-4f42-bdec-c3849c419565)
+
+gitpod /workspace/argocd-hub-spoke (main) $ kubectl get cm
+NAME               DATA   AGE
+guest-book         1      18s
+kube-root-ca.crt   1      109m
+gitpod /workspace/argocd-hub-spoke (main) $ kubectl delete configmap guest-book
+configmap "guest-book" deleted
+![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/53aca16a-d0e0-49a5-96cc-d076970d27c2)
+
+Sync the application using the argocd UI - COnfig map applied automatically by argocd
+
+gitpod /workspace/argocd-hub-spoke (main) $ kubectl get cm
+NAME               DATA   AGE
+guest-book         1      28s
+kube-root-ca.crt   1      110m
+
+
 
 
