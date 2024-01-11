@@ -85,6 +85,10 @@ Add the cluster to the hub server
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/faa63ed0-1f40-44bb-9660-62eb0814f309)
 
+Note: We can add the clusters using the UI. We need the argocd cli to add the clusters. Make sure we install argocd CLI
+
+Login to argocd using the argocd CLI
+```
 gitpod /workspace/argocd-hub-spoke (main) $ argocd login 3.33.233.51:31400
 WARNING: server certificate had error: tls: failed to verify certificate: x509: cannot validate certificate for 3.81.233.51 because it doesn't contain any IP SANs. Proceed insecurely (y/n)? y
 Username: admin
@@ -102,6 +106,7 @@ INFO[0003] ClusterRole "argocd-manager-role" created
 INFO[0003] ClusterRoleBinding "argocd-manager-role-binding" created 
 INFO[0008] Created bearer token secret for ServiceAccount "argocd-manager" 
 Cluster 'https://463ED5F24BF0FF928739B9588A2258354.gr7.us-east-1.eks.amazonaws.com' added
+```
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/7d2334c6-dbef-4a04-be9a-47dcf839f91e)
 
