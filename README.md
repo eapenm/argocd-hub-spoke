@@ -38,7 +38,7 @@ kubectl get cm -n argocd
 https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
 kubeclt edit configmap argocd-cmd-params-cm -n argocd
 ```
-Add the below code to configmap argocd-cmd-params-cm configmap
+##### Add the below code to configmap argocd-cmd-params-cm configmap
 ```
 data:
   server.insecure: "true"
