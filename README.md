@@ -154,6 +154,8 @@ gitpod /workspace/argocd-hub-spoke (main) $
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/cfeb302b-f408-4dba-be68-ba71278780a9)
 
+#### Argocd will automatically sync the cluster based on the Git.
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/9d7f89ce-ede9-4f42-bdec-c3849c419565)
 
 #### List the config maps:
