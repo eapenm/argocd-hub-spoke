@@ -10,6 +10,13 @@ tasks:
     before: |
       source ./bin/install_aws_cli
       source ./bin/set_tf_alias
+  - name: Install eksctl
+    before: |
+      - sudo wget -O /usr/local/bin/eksctl https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64
+      - sudo chmod +x /usr/local/bin/eksctl
+    command: |
+      sudo apt-get update
+      sudo apt-get install -y eksctl
 vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode
