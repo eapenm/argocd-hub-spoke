@@ -1,4 +1,5 @@
 # ARGOCD - HUB & SPOKE Design
+
 #### List the contexts of the clusters
 ```
 $ kubectl config get-contexts
@@ -16,22 +17,22 @@ Refer the below getting started document
 ```
 https://argo-cd.readthedocs.io/en/stable/getting_started/
 ```
-Instruction to Deploy Argocd:
+#### Instruction to Deploy Argocd:
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
-List all the objects installed
+#### List all the objects installed
 ```
 $ kubectl get all -A
 ```
 
-List the config maps of ago cd
+#### List the config maps of ago cd
 ```
 kubectl get cm -n argocd
 ```
 
-Edit argocd-cmd-params-cm  to make this insecure, ie. http
+#### Edit argocd-cmd-params-cm  to make this insecure, ie. http
 
 ```
 https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
@@ -149,30 +150,43 @@ replicaset.apps/guestbook-ui-6b7f6d9874   1         1         1       4m55s
 gitpod /workspace/argocd-hub-spoke (main) $ 
 ```
 
-Change the following file and sync the application in argocd:
+Modify the following file and sync the application in argocd:
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/cfeb302b-f408-4dba-be68-ba71278780a9)
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/9d7f89ce-ede9-4f42-bdec-c3849c419565)
 
+List the config maps:
+```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl get cm
 NAME               DATA   AGE
 guest-book         1      18s
 kube-root-ca.crt   1      109m
+```
+Delete the guest-book config map from the  cluster:
+```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl delete configmap guest-book
 configmap "guest-book" deleted
+```
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/53aca16a-d0e0-49a5-96cc-d076970d27c2)
 
-Sync the application using the argocd UI - COnfig map applied automatically by argocd
 
+Sync the application using the argocd UI, then the Config map object will be applied automatically by argocd
+
+```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl get cm
 NAME               DATA   AGE
 guest-book         1      28s
 kube-root-ca.crt   1      110m
-
+```
 
 
 ### Delete the Cluster using below:
+```
 eksctl delete cluster --name hub-cluster --region us-east-1
 
 eksctl delete cluster --name spoke-cluster-1 --region us-east-1
+```
+
 
