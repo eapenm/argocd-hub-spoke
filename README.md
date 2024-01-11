@@ -1,6 +1,6 @@
 # ARGOCD - HUB & SPOKE Design
 ### List the contexts of the clusters
-```$ kubectl config get-contexts
+``` $ kubectl config get-contexts
 CURRENT   NAME                                                 CLUSTER                               AUTHINFO                                             NAMESPACE
           user@hub-cluster.us-east-1.eksctl.io       hub-cluster.us-east-1.eksctl.io       user@hub-cluster.us-east-1.eksctl.io       
 *         user@spoke-cluster-1.us-east-1.eksctl.io   spoke-cluster-1.us-east-1.eksctl.io   user@spoke-cluster-1.us-east-1.eksctl.io  
