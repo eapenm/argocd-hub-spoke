@@ -142,4 +142,8 @@ kube-root-ca.crt   1      110m
 
 
 
+### Delete the Cluster using below:
+eksctl delete cluster --name hub-cluster --region us-east-1
+
+eksctl delete cluster --name spoke-cluster-1 --region us-east-1
 
