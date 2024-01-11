@@ -52,14 +52,16 @@ Add the below code to argocd-server service file
   type: NodePort
 ```
 Take the ip adress of one of the EC2 machine and make sure the SG is updated with the port:
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/97b332ad-e429-4bbe-acc7-abf2b08acb06)
+
+```
  $ k get secrets -n argocd
 NAME                          TYPE     DATA   AGE
 argocd-initial-admin-secret   Opaque   1      38m
 argocd-notifications-secret   Opaque   0      38m
 argocd-secret                 Opaque   5      38m
-gitpod /workspace/argocd-hub-spoke (main) $ k edit secrets argocd-initial-admin-secret -n argocd
-Edit cancelled, no changes made.
+
 gitpod /workspace/argocd-hub-spoke (main) $ k get secrets argocd-initial-admin-secret -n argocd -o yaml
 apiVersion: v1
 data:
@@ -72,19 +74,15 @@ metadata:
   resourceVersion: "5496"
   uid: fd381325-679a-49c3-b269-992e94d2c2d8
 type: Opaque
-gitpod /workspace/argocd-hub-spoke (main) $ echo argocd-initial-admin-secret -n argocd | base64 --decode
-j�(qbase64: invalid input
-gitpod /workspace/argocd-hub-spoke (main) $ echo argocd-initial-admin-secret -n argocd^C base64 --decode
-gitpod /workspace/argocd-hub-spoke (main) $ echo YkFvUUVNMHItMXNTU3dnag== base64 --decode
-bash: ech: command not found
-gitpod /workspace/argocd-hub-spoke (main) $ echo hi
-hi
+
 gitpod /workspace/argocd-hub-spoke (main) $ echo YkFvUUVNMHItMXNTU3dnag== | base64 --decode
 bAoQEM0r-1sSSwgj
+```
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/3b54cb15-4e60-4c98-8709-1127b586ddc6)
 
-Add cluster
+Add the cluster to the hub server
+
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/faa63ed0-1f40-44bb-9660-62eb0814f309)
 
 gitpod /workspace/argocd-hub-spoke (main) $ argocd login 3.33.233.51:31400
