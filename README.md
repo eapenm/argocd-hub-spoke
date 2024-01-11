@@ -38,21 +38,21 @@ kubectl get cm -n argocd
 https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
 kubeclt edit configmap argocd-cmd-params-cm -n argocd
 ```
-##### Add the below code to configmap argocd-cmd-params-cm configmap
+#### Add the below code to configmap argocd-cmd-params-cm configmap
 ```
 data:
   server.insecure: "true"
 ```
 
-Change the type of argocd-server service to nodeport
+#### Change the type of argocd-server service to nodeport
 ```
  kubeclt edit svc argocd-server -n argocd
  ```
-Add the below code to argocd-server service file
+#### Add the below code to argocd-server service file
 ```
   type: NodePort
 ```
-Take the ip adress of one of the EC2 machine and make sure the SG is updated with the port:
+#### Take the ip adress of one of the EC2 machine and make sure the SG is updated with the port:
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/97b332ad-e429-4bbe-acc7-abf2b08acb06)
 
@@ -82,13 +82,13 @@ bAoQEM0r-1sSSwgj
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/3b54cb15-4e60-4c98-8709-1127b586ddc6)
 
-Add the cluster to the hub server
+#### Add the cluster to the hub server
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/faa63ed0-1f40-44bb-9660-62eb0814f309)
 
 Note: We can add the clusters using the UI. We need the argocd cli to add the clusters. Make sure we install argocd CLI
 
-Login to argocd using the argocd CLI
+#### Login to argocd using the argocd CLI
 ```
 gitpod /workspace/argocd-hub-spoke (main) $ argocd login 3.33.233.51:31400
 WARNING: server certificate had error: tls: failed to verify certificate: x509: cannot validate certificate for 3.81.233.51 because it doesn't contain any IP SANs. Proceed insecurely (y/n)? y
@@ -123,14 +123,14 @@ To deploying the application to EKS, we need to configure application in argocd 
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/f4fe30ab-9167-4cd7-9fec-b32cd1e76fcd)
 
-List the cluster context:
+#### List the cluster context:
 ```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl config get-contexts
 CURRENT   NAME                                                 CLUSTER                               AUTHINFO                                             NAMESPACE
 *         user@hub-cluster.us-east-1.eksctl.io       hub-cluster.us-east-1.eksctl.io       user@hub-cluster.us-east-1.eksctl.io       
           user@spoke-cluster-1.us-east-1.eksctl.io   spoke-cluster-1.us-east-1.eksctl.io   user@spoke-cluster-1.us-east-1.eksctl.io   
 ```
-Switch the context to the spoke cluster:
+#### Switch the context to the spoke cluster:
 ```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl config use-context user@spoke-cluster-1.us-east-1.eksctl.io
 Switched to context "user@spoke-cluster-1.us-east-1.eksctl.io".
@@ -150,20 +150,20 @@ replicaset.apps/guestbook-ui-6b7f6d9874   1         1         1       4m55s
 gitpod /workspace/argocd-hub-spoke (main) $ 
 ```
 
-Modify the following file and sync the application in argocd:
+#### Modify the following file and sync the application in argocd:
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/cfeb302b-f408-4dba-be68-ba71278780a9)
 
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/9d7f89ce-ede9-4f42-bdec-c3849c419565)
 
-List the config maps:
+#### List the config maps:
 ```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl get cm
 NAME               DATA   AGE
 guest-book         1      18s
 kube-root-ca.crt   1      109m
 ```
-Delete the guest-book config map from the  cluster:
+#### Delete the guest-book config map from the  cluster:
 ```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl delete configmap guest-book
 configmap "guest-book" deleted
@@ -172,7 +172,7 @@ configmap "guest-book" deleted
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/53aca16a-d0e0-49a5-96cc-d076970d27c2)
 
 
-Sync the application using the argocd UI, then the Config map object will be applied automatically by argocd
+#### Sync the application using the argocd UI, then the Config map object will be applied automatically by argocd
 
 ```
 gitpod /workspace/argocd-hub-spoke (main) $ kubectl get cm
