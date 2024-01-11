@@ -25,6 +25,9 @@ tasks:
       sudo mv /tmp/eksctl /usr/local/bin/eksctl
       sudo chmod +x /usr/local/bin/eksctl
       sudo apt-get install -y eksctl
+  - name: Install kubectl
+    before: |
+      source ./bin/install_kubectl
 vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode
