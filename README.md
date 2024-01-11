@@ -1,5 +1,5 @@
 # ARGOCD - HUB & SPOKE Design
-### List the contexts of the clusters
+#### List the contexts of the clusters
 ```
 $ kubectl config get-contexts
 CURRENT   NAME                                                 CLUSTER                               AUTHINFO                                             NAMESPACE
@@ -11,29 +11,46 @@ $ kubectl config use-context user@hub-cluster.us-east-1.eksctl.io
 Switched to context "user@hub-cluster.us-east-1.eksctl.io".
 ```
 
-
+#### Install Argo CD:
+Refer the below getting started document
+```
 https://argo-cd.readthedocs.io/en/stable/getting_started/
-Install Argo CD:
+```
+Instruction to Deploy Argocd:
+```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-
+```
+List all the objects installed
+```
 $ kubectl get all -A
+```
 
-LIst the config maps of ago cd
+List the config maps of ago cd
+```
 kubectl get cm -n argocd
-Edit argocd-cmd-params-cm  to make this insecure, http
-kubectl edit cm argocd-cmd-params-cm  -n argocd
+```
 
+Edit argocd-cmd-params-cm  to make this insecure, ie. http
 
+```
 https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
 kubeclt edit configmap argocd-cmd-params-cm -n argocd
-
+```
+Add the below code to configmap argocd-cmd-params-cm configmap
+```
 data:
   server.insecure: "true"
+```
 
-Chnage the type of argocd-server service to nodeport
- k edit svc argocd-server -n argocd
+Change the type of argocd-server service to nodeport
+```
+ kubeclt edit svc argocd-server -n argocd
+ ```
+Add the below code to argocd-server service file
+```
   type: NodePort
+```
 Take the ip adress of one of the EC2 machine and make sure the SG is updated with the port:
 ![image](https://github.com/eapenm/argocd-hub-spoke/assets/13297994/97b332ad-e429-4bbe-acc7-abf2b08acb06)
  $ k get secrets -n argocd
